@@ -1,0 +1,268 @@
+/* content.css - Fotoğraf, Video ve GIF İndirme Rozeti Stilleri */
+
+/* 1. Ekran Kenarında Sabit Yüzen İndirme Çubuğu (Screen Edge Dock) */
+.__lrg_badge_container {
+  position: fixed !important;
+  right: 0 !important;
+  top: 45% !important;
+  transform: translateY(-50%) !important;
+  left: auto !important;
+  bottom: auto !important;
+  z-index: 2147483645 !important;
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  align-items: center !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  pointer-events: auto !important;
+  user-select: none !important;
+  transition: transform 0.2s ease, opacity 0.2s ease !important;
+}
+
+.__lrg_badge_pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  background: rgba(15, 23, 42, 0.95) !important;
+  color: #ffffff !important;
+  padding: 8px 12px 8px 14px !important;
+  border-radius: 20px 0 0 20px !important; /* Tarayıcı sağ kenarına yaslı */
+  box-shadow: -4px 4px 20px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.15) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  backdrop-filter: blur(10px) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  white-space: nowrap !important;
+}
+
+.__lrg_badge_pill:hover {
+  transform: translateX(-4px) !important;
+  box-shadow: -6px 6px 24px rgba(0, 0, 0, 0.65), 0 0 0 1px #38bdf8 !important;
+  background: #0f172a !important;
+}
+
+/* Kapat Butonu */
+.__lrg_close_btn {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: none !important;
+  color: #94a3b8 !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  margin-left: 4px !important;
+  padding: 0 !important;
+  transition: all 0.15s ease !important;
+}
+
+.__lrg_close_btn:hover {
+  background: #ef4444 !important;
+  color: #ffffff !important;
+}
+
+.__lrg_badge_pill .__lrg_icon {
+  font-size: 13px;
+}
+
+.__lrg_badge_pill .__lrg_size_tag {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.__lrg_badge_pill .__lrg_format_tag {
+  background: rgba(245, 158, 11, 0.25);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Video Özel Format Rozeti */
+.__lrg_badge_pill .__lrg_format_tag.__lrg_fmt_video {
+  background: rgba(124, 58, 237, 0.35);
+  color: #c4b5fd;
+  border: 1px solid rgba(139, 92, 246, 0.5);
+}
+
+/* GIF Özel Format Rozeti */
+.__lrg_badge_pill .__lrg_format_tag.__lrg_fmt_gif {
+  background: rgba(217, 119, 6, 0.35);
+  color: #fde68a;
+  border: 1px solid rgba(245, 158, 11, 0.5);
+}
+
+/* 2. Açılır İndirme Menüsü (Sola Doğru Açar, İçeriği Asla Kapatmaz) */
+.__lrg_menu {
+  display: none;
+  position: absolute !important;
+  right: 100% !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin-right: 8px !important;
+  background: #0f172a !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  padding: 8px !important;
+  min-width: 250px !important;
+  box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+  animation: __lrg_fadeIn 0.15s ease-out forwards !important;
+}
+
+/* Fare pill ile menü arasındaki boşluktan geçerken kapanmayı engelleyen görünmez köprü */
+.__lrg_menu::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -10px;
+  width: 12px;
+  background: transparent;
+}
+
+/* Hover olduğunda VEYA tıklandığında sabit kalması için .__lrg_menu_open sınıfı */
+.__lrg_badge_container:hover .__lrg_menu,
+.__lrg_badge_container.__lrg_menu_open .__lrg_menu {
+  display: flex !important;
+}
+
+.__lrg_menu_header {
+  font-size: 10px;
+  color: #94a3b8;
+  padding: 3px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  letter-spacing: 0.3px;
+}
+
+.__lrg_btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.__lrg_btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.5);
+  color: #ffffff;
+  transform: translateX(-2px);
+}
+
+.__lrg_btn_primary {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.__lrg_btn_primary:hover {
+  background: #0369a1;
+  border-color: #7dd3fc;
+}
+
+/* Video İndirme Butonu (Mor Gradient) */
+.__lrg_btn_video {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  border-color: #8b5cf6;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.__lrg_btn_video:hover {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  border-color: #a78bfa;
+}
+
+/* Kayıt Sırasında Kırmızı Pulsing Buton */
+.__lrg_btn_recording {
+  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%) !important;
+  border-color: #f87171 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  animation: __lrg_pulse 1.2s infinite ease-in-out !important;
+}
+
+@keyframes __lrg_pulse {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.8); }
+  70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* GIF İndirme Butonu (Turuncu / Amber Gradient) */
+.__lrg_btn_gif {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  border-color: #f59e0b;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.__lrg_btn_gif:hover {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border-color: #fde68a;
+}
+
+/* Video Karesi Yakalama (Snapshot) Butonu */
+.__lrg_btn_snapshot {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  border-color: #38bdf8;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.__lrg_btn_snapshot:hover {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  border-color: #7dd3fc;
+}
+
+.__lrg_btn_webp {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  border-color: #34d399;
+  color: #ffffff;
+}
+
+.__lrg_btn_webp:hover {
+  background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+  border-color: #6ee7b7;
+}
+
+/* Vurgulama */
+.__lrg_highlight_active {
+  outline: 3px solid #38bdf8 !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.6) !important;
+  transition: outline 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+@keyframes __lrg_fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

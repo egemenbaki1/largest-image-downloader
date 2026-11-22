@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Medya İndirici (Fotoğraf, Video & GIF)</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <header class="header">
+      <div class="logo-area">
+        <span class="logo-icon">🎬</span>
+        <div>
+          <h1 class="title">Medya İndirici</h1>
+          <p class="subtitle">Fotoğraf, Video ve GIF İndirici</p>
+        </div>
+      </div>
+      <button id="rescanBtn" class="btn-icon" title="Sayfayı Yeniden Tara">🔄</button>
+    </header>
+
+    <div class="dock-toggle-strip">
+      <div class="dock-toggle-labels">
+        <span class="dock-toggle-title">📌 Sayfa Kenar Çubuğu</span>
+        <span class="dock-toggle-desc">Ekranın sağ kenarında indiriciyi göster</span>
+      </div>
+      <label class="switch" title="Bu sayfada kenar çubuğunu aç / kapat">
+        <input type="checkbox" id="sideDockToggle" checked>
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <div id="warningNotice" class="warning-box hidden"></div>
+
+    <div id="loadingState" class="state-panel">
+      <div class="spinner"></div>
+      <p>Medyalar taranıyor...</p>
+    </div>
+
+    <div id="emptyState" class="state-panel hidden">
+      <p class="empty-text">Ekranda uygun fotoğraf veya video bulunamadı.</p>
+      <button id="emptyRetryBtn" class="btn btn-secondary" style="margin-top:10px;">Tekrar Dene</button>
+    </div>
+
+    <main id="mainContent" class="main-content hidden">
+      <!-- O An Ekranda Görünen Medya Kartı -->
+      <section class="card featured-card">
+        <div id="screenBadge" class="badge-ribbon">👁️ EKRANDA GÖRÜNEN</div>
+        <div class="preview-wrapper">
+          <img id="mainImgPreview" src="" alt="Önizleme" />
+          <video id="mainVideoPreview" class="hidden" muted autoplay loop playsinline></video>
+          <div id="mainImgFormat" class="format-pill">WEBP</div>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Orijinal Boyut:</span>
+          <span id="mainImgDims" class="info-val">1920 × 1080 px</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Format / Tür:</span>
+          <span id="mainImgStatus" class="info-val status-tag">WEBP</span>
+        </div>
+
+        <div class="action-buttons">
+          <button id="mainDownloadOrig" class="btn btn-primary">
+            💾 Orijinal İndir
+          </button>
+          
+          <button id="mainDownloadPng" class="btn btn-emerald">
+            🖼️ PNG İndir (%100 Kayıpsız)
+          </button>
+          <button id="mainDownloadJpg" class="btn btn-emerald">
+            🖼️ JPG İndir (Maksimum Kalite %100)
+          </button>
+
+          <button id="copyUrlBtn" class="btn btn-ghost">
+            🔗 Orijinal Linki Kopyala
+          </button>
+        </div>
+      </section>
+
+      <!-- Sayfadaki Diğer Medyalar -->
+      <section id="otherImagesSection" class="other-section hidden">
+        <h2 class="section-title">Sayfadaki Diğer Medyalar</h2>
+        <div id="otherImagesList" class="images-list"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Fotoğraf, Video ve GIF • En Üst Kalitede İndirme</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

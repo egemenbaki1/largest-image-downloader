@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Medya İndirici (Fotoğraf, Video & GIF) - Test Sayfası</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      background: #f8fafc;
+      color: #1e293b;
+    }
+    h1 { color: #0284c7; }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      margin-bottom: 24px;
+      border: 1px solid #e2e8f0;
+    }
+    .thumb-scaled {
+      width: 140px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #38bdf8;
+    }
+    .hero-bg {
+      width: 100%;
+      height: 200px;
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    }
+    video {
+      width: 100%;
+      max-height: 380px;
+      border-radius: 8px;
+      background: #000;
+    }
+    button {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button:hover {
+      background: #0369a1;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 Medya İndirici (Fotoğraf, Video & GIF) - Test Sayfası</h1>
+  <p>Bu sayfa eklentinin fotoğrafları, doğrudan videoları, Blob/Stream canlı akışlarını ve GIF'leri nasıl tespit edip indirdiğini test etmek için hazırlanmıştır.</p>
+
+  <!-- Senaryo 1: HTML5 Doğrudan Video (<video>) -->
+  <div class="card">
+    <h3>🎬 1. Doğrudan HTML5 Video (MP4)</h3>
+    <p>Doğrudan MP4 bağlantısına sahip standart video. Eklenti tek tıkla orijinal MP4 olarak indirmelidir.</p>
+    <video controls preload="auto" title="Doğa Çiçek Manzara Videosu">
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+      Tarayıcınız video etiketini desteklemiyor.
+    </video>
+  </div>
+
+  <!-- Senaryo 2: Blob / Stream Akış Videosu -->
+  <div class="card">
+    <h3>🔴 2. Blob / Stream Canlı Akış Videosu (blob:https://...)</h3>
+    <p>YouTube, Twitter, Instagram gibi sitelerdeki gibi <code>blob:https://...</code> akışı kullanan video. Eklenti '🔴 Akışı Canlı Kaydet' veya anında indirme/snapshot çözümlerini sunmalıdır.</p>
+    <video id="blobVideoTest" controls preload="auto" title="Blob Akış Test Videosu"></video>
+    <script>
+      (async function() {
+        try {
+          const res = await fetch("https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4");
+          const blob = await res.blob();
+          const v = document.getElementById("blobVideoTest");
+          if (v) v.src = URL.createObjectURL(blob);
+        } catch(e) {}
+      })();
+    </script>
+  </div>
+
+  <!-- Senaryo 3: Hareketli GIF -->
+  <div class="card">
+    <h3>🎞️ 3. Hareketli GIF (GIF Formatı)</h3>
+    <p>Eklenti hareketli GIF'i tanımalı, amber renkli <strong>🎞️ GIF İndir</strong> rozeti eklemeli; orijinal animasyonlu .gif olarak veya ilk karesini kayıpsız PNG/JPG olarak indirme seçenekleri sunmalıdır.</p>
+    <img 
+      src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif" 
+      alt="Dönen Dünya Animasyonlu GIF" 
+      style="max-width: 280px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"
+    />
+  </div>
+
+  <!-- Senaryo 4: Pinterest Benzeri Gizli HD Video (Script & Poster İçinde MP4) -->
+  <div class="card">
+    <h3>📌 4. Pinterest Benzeri Blob Video (Sayfa İçinde Gizli 720p/1080p MP4)</h3>
+    <p>Blob akışı oynatırken arka plandaki JSON veya CDN verisinden doğrudan orijinal HD MP4 dosyasını algılama testi:</p>
+    <div style="position: relative; max-width: 500px;">
+      <video 
+        id="pinterestSimVideo" 
+        controls 
+        poster="https://i.pinimg.com/videos_thumbnails/720p/2b/9a/c0/2b9ac0e6a32f6b3cfc23e80ff36b694f.jpg"
+        title="Yapay Zeka Panosundaki Video"
+      ></video>
+    </div>
+    <script id="__PWS_DATA__" type="application/json">
+      {"videos":{"video_list":{"V_720P":{"url":"https:\/\/interactive-examples.mdn.mozilla.net\/media\/cc0-videos\/flower.mp4"}}}}
+    </script>
+    <script>
+      (async function() {
+        try {
+          const res = await fetch("https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4");
+          const blob = await res.blob();
+          const v = document.getElementById("pinterestSimVideo");
+          if (v) v.src = URL.createObjectURL(blob);
+        } catch(e) {}
+      })();
+    </script>
+  </div>
+
+  <!-- Senaryo 4: CSS ile Küçültülmüş Dev Fotoğraf (WebP formatında) -->
+  <div class="card">
+    <h3>🖼️ 4. Küçültülmüş Görsel (Küçük gösterilmiş ama orijinali 2400x1600 WebP)</h3>
+    <p>Aşağıdaki fotoğraf CSS ile 140x90 piksele küçültülmüştür. Eklenti orijinal boyutunu algılamalı ve sağ üst köşesine rozet eklemelidir.</p>
+    <div style="position: relative; display: inline-block;">
+      <img 
+        class="thumb-scaled" 
+        src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fm=webp&q=80&w=2400" 
+        alt="Doğa Manzarası (WebP)"
+      />
+    </div>
+  </div>
+
+  <!-- Senaryo 5: Srcset Kullanan Çoklu Çözünürlüklü Görsel -->
+  <div class="card">
+    <h3>🖼️ 5. Srcset İle Yüksek Çözünürlüklü Kaynak (2500w)</h3>
+    <p>Tarayıcı 400w görseli yüklese bile eklenti srcset içerisindeki en büyük 2500w kaynağı bulmalıdır.</p>
+    <img 
+      src="https://images.unsplash.com/photo-1511497584788-87676104235f?w=400"
+      srcset="https://images.unsplash.com/photo-1511497584788-87676104235f?w=400 400w, https://images.unsplash.com/photo-1511497584788-87676104235f?w=1200 1200w, https://images.unsplash.com/photo-1511497584788-87676104235f?fm=webp&w=2500 2500w"
+      style="max-width: 100%; height: auto; border-radius: 8px;"
+      alt="Orman Manzarası"
+    />
+  </div>
+
+  <!-- Senaryo 6: CSS Background-image ile Kullanılan Görsel -->
+  <div class="card">
+    <h3>🖼️ 6. CSS Background-Image Olarak Yerleştirilmiş Görsel</h3>
+    <div 
+      class="hero-bg" 
+      style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?fm=webp&w=2000');">
+      CSS Arka Plan Manzarası (WebP)
+    </div>
+  </div>
+</body>
+</html>
